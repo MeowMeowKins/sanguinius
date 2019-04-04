@@ -25,9 +25,12 @@ systemctl enable httpd
 systemctl enable mariadb
 systemctl restart httpd
 
-read -sp 'Password for MySQL roo: ' rootpass
+read -sp 'Password for MySQL root: ' rootpass
 echo 
 read -sp 'Password for Zabbix database user: ' zbxpass
+echo
+read -sp 'Provide your timezone as you do in PHP: ' phptime
+echo
 
 mysql_secure_installation <<EOF
 
@@ -51,5 +54,5 @@ systemctl start zabbix-agent
 systemctl restart httpd
 systemctl enable zabbix-server
 systemctl enable zabbix-agent
-sed -e "19i		php_value date.timezone Europe/Amsterdam" -i /etc/httpd/conf.d/zabbix.conf
+sed -e "19i		php_value date.timezone $phptime" -i /etc/httpd/conf.d/zabbix.conf
 systemctl restart httpd
