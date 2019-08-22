@@ -46,7 +46,7 @@ if ((Get-Service $service).Status -ne "Running")
     if  ($email){
         Write-Host $body `n"Sending notifications..."
         $Error.Clear
-        send-email -subject $subject -body $body -t ""
+        send-email -subject $subject -body $body -to ""
         send-telegram
         if (!$Error){
         Write-Host "Notifications sent successfully."
