@@ -25,7 +25,6 @@ $Response = Invoke-RestMethod -Uri "https://api.telegram.org/bot$($MyToken)/send
 $MyToken = ""
 $chatID = 
 $email = $true
-$mailto = ""
 
 if ((Get-Service $service).Status -ne "Running")
 {
